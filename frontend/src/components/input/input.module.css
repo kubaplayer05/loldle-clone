@@ -1,0 +1,8 @@
+input {
+    font-size: 1.6rem;
+    background-color: #333;
+    color: #fff;
+    border: 2px solid #2e09b3;
+    padding: 0.8rem 1.6rem;
+    text-align: left;
+}

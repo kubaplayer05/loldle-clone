@@ -6,11 +6,13 @@ import getRandomNumber from "../utils/getRandomNumber";
 configDotenv()
 
 const dbUrl = process.env.DB_URL || ""
-const client = new MongoClient(dbUrl)
+
 
 export const getAllChampions = async (req: Request, res: Response) => {
 
     try {
+        const client = new MongoClient(dbUrl)
+
         await client.connect()
 
         const database = client.db("lol")
@@ -38,6 +40,8 @@ export const getAllChampions = async (req: Request, res: Response) => {
 export const getRandomChampion = async (req: Request, res: Response) => {
 
     try {
+        const client = new MongoClient(dbUrl)
+
         await client.connect()
 
         const database = client.db("lol")

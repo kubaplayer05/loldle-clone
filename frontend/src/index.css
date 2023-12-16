@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;500;700;900&display=swap');
 
+:root {
+    --black: #27272A;
+    --white: #FAFAFA;
+    --gray-800: #292524;
+    --gray-300: #CBD5E1;
+    --success: #65A30D;
+    --warning: #D97706;
+    --wrong: #881337;
+    --blue-900: #0C4A6E;
+    --blue-600: #0284C7;
+    --blue-400: #38BDF8;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -12,8 +25,13 @@ html {
 }
 
 body {
-    background-color: #222;
-    color: #fff;
+    background-color: var(--black);
+    color: var(--white);
+    width: 100%;
+    min-height: 100vh;
+}
+
+#root {
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -24,6 +42,8 @@ body {
 
 main {
     padding: 5rem 0;
+    width: 90%;
+    max-width: 1200px;
 }
 
 h1 {

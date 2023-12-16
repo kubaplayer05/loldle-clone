@@ -1,3 +1,7 @@
+import {Champion} from "../../../types/championTypes.ts";
+import style from "./attemptChampion.module.css"
+import {getBoxStyle} from "../../../lib/getBoxStyle.ts";
+
 interface AttemptChampionProps {
     name: string,
     gender: string,
@@ -6,10 +10,9 @@ interface AttemptChampionProps {
     resource: string,
     rangeType: string,
     regions: [string]
-    releaseYear: string
+    releaseYear: string,
+    randomChampion: Champion
 }
-
-import style from "./attemptChampion.module.css"
 
 export default function AttemptChampion({
                                             name,
@@ -19,63 +22,69 @@ export default function AttemptChampion({
                                             resource,
                                             rangeType,
                                             regions,
-                                            releaseYear
+                                            releaseYear,
+                                            randomChampion
                                         }: AttemptChampionProps) {
+
+
+    const formattedYear = releaseYear.split("-")[0]
+    const formattedYearForRandom = randomChampion.releaseDate.split("-")[0]
 
     return (
         <div className={style.wrapper}>
             <div className={style.boxWrapper}>
-                <h3>Champion</h3>
-                <div className={style.box}>
+
+                <div className={`${style.box} ${randomChampion.name === name ? style.perfect : style.wrong}`}>
                     <p>{name}</p>
                 </div>
             </div>
             <div className={style.boxWrapper}>
-                <h3>Gender</h3>
-                <div className={style.box}>
+
+                <div className={`${style.box} ${randomChampion.gender === gender ? style.perfect : style.wrong}`}>
                     <p>{gender}</p>
                 </div>
             </div>
             <div className={style.boxWrapper}>
-                <h3>Position(s)</h3>
-                <div className={style.box}>
+
+                <div className={`${style.box} ${getBoxStyle(randomChampion.positions, positions)}`}>
                     <p>{positions.map(position => {
                         return `${position} `
                     })}</p>
                 </div>
             </div>
             <div className={style.boxWrapper}>
-                <h3>Species</h3>
-                <div className={style.box}>
+
+                <div className={`${style.box} ${getBoxStyle(randomChampion.species, species)}`}>
                     <p>{species.map(specie => {
                         return `${specie} `
                     })}</p>
                 </div>
             </div>
             <div className={style.boxWrapper}>
-                <h3>Resource</h3>
-                <div className={style.box}>
+
+                <div className={`${style.box} ${randomChampion.resource === resource ? style.perfect : style.wrong}`}>
                     <p>{resource}</p>
                 </div>
             </div>
             <div className={style.boxWrapper}>
-                <h3>Range Type</h3>
-                <div className={style.box}>
+
+                <div className={`${style.box} ${randomChampion.rangeType === rangeType ? style.perfect : style.wrong}`}>
                     <p>{rangeType}</p>
                 </div>
             </div>
             <div className={style.boxWrapper}>
-                <h3>Regions</h3>
-                <div className={style.box}>
+
+                <div className={`${style.box} ${getBoxStyle(randomChampion.regions, regions)}`}>
                     <p>{regions.map(region => {
                         return `${region} `
                     })}</p>
                 </div>
             </div>
             <div className={style.boxWrapper}>
-                <h3>Release Year</h3>
-                <div className={style.box}>
-                    <p>{releaseYear}</p>
+
+                <div
+                    className={`${style.box} ${formattedYearForRandom === formattedYear ? style.perfect : style.wrong}`}>
+                    <p>{formattedYear}</p>
                 </div>
             </div>
         </div>

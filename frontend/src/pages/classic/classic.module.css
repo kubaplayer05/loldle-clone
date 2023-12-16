@@ -1,0 +1,16 @@
+.form {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    color: white;
+}
+
+.input {
+    width: 100%;
+}
+
+.btn {
+    width: 100px;
+}

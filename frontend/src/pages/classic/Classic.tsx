@@ -1,17 +1,32 @@
 import Input from "../../components/input/Input.tsx";
 import {useRandomChampion} from "../../hooks/useRandomChampion.tsx";
-import AttemptChampion from "../../components/classic/AttemptChampion/AttemptChampion.tsx";
+import AttemptList from "../../components/classic/AttemptList/AttemptList.tsx";
+import {ChangeEvent} from "react";
+import Button from "../../components/button/Button.tsx";
+import {useChampionForm} from "../../hooks/useChampionForm.tsx";
+import ChampionsDataList from "../../components/classic/ChampionsDataList/ChampionsDataList.tsx";
+import styles from "./classic.module.css"
+import {useWinModal} from "../../hooks/useWinModal.tsx";
+import WinModal from "../../components/classic/WinModal/WinModal.tsx";
 
 export default function Classic() {
 
-    const {name, gender, positions, species, resource, rangeType, regions, releaseDate} = useRandomChampion()
+    const randomChampion = useRandomChampion()
+    const {champions, submitHandler, value, setValue} = useChampionForm()
+    const {showWinModal, setShowWinModal} = useWinModal(randomChampion, champions)
 
     return (
         <main>
-            <Input placeholder="Enter champion name..."/>
-            <AttemptChampion name={name} gender={gender} positions={positions} species={species} resource={resource}
-                             rangeType={rangeType} regions={regions}
-                             releaseYear={releaseDate.split("-")[0]}/>
+            <form onSubmit={submitHandler} className={styles.form}>
+                <Input value={value} onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                    setValue(e.target.value);
+                }} placeholder="Enter champion name..." list={"champions"} className={styles.input}/>
+                <ChampionsDataList id={"champions"}/>
+                <Button isLink={false} className={styles.btn}>Send</Button>
+            </form>
+            {randomChampion && <AttemptList champions={champions} randomChampion={randomChampion}/>}
+            {showWinModal && randomChampion &&
+                <WinModal randomChampion={randomChampion} setShowModal={setShowWinModal}/>}
         </main>
     )
 }

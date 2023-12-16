@@ -1,25 +1,27 @@
 import {Link} from "react-router-dom";
-import {ReactNode} from "react";
+import {MouseEventHandler, ReactNode} from "react";
 import styles from "./button.module.css"
 
 interface ButtonProps {
     isLink: boolean
-    linkPath: string
+    linkPath?: string
     children: ReactNode
+    className?: string
+    onClick?: MouseEventHandler
 }
 
-export default function Button({isLink, linkPath, children}: ButtonProps) {
+export default function Button({isLink, linkPath, children, className, onClick}: ButtonProps) {
 
-    if (isLink) {
+    if (isLink && linkPath) {
         return (
-            <Link to={linkPath} className={styles.btn}>
+            <Link to={linkPath} className={`${styles.btn} ${className}`}>
                 {children}
             </Link>
         )
     }
 
     return (
-        <button className={styles.btn}>
+        <button onClick={onClick} className={`${styles.btn} ${className}`}>
             {children}
         </button>
     )

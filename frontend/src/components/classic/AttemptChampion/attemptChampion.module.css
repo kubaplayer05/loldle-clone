@@ -5,15 +5,11 @@
     gap: 0.6rem;
 }
 
-.box-wrapper {
+.boxWrapper {
     font-size: 2rem;
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
-}
-
-.box-wrapper h3 {
-    text-decoration: underline;
+    gap: 0.5rem;
 }
 
 .box {
@@ -23,5 +19,23 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    border: 1px solid #ddd;
+    padding: 1rem 2rem;
+    border: 2px solid var(--gray-300);
+}
+
+.box > p {
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+.wrong {
+    background-color: var(--wrong);
+}
+
+.good {
+    background-color: var(--warning);
+}
+
+.perfect {
+    background-color: var(--success);
 }

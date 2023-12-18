@@ -12,11 +12,16 @@ export function useRandomChampion() {
         throw Error("Champions not provided")
     }
 
+    function refreshRandomChampion() {
+        const index = getRandomNumber(champions.length)
+        setRandomChampion(champions[index])
+    }
+
     const index = getRandomNumber(champions.length)
 
     useEffect(() => {
         setRandomChampion(champions[index])
     }, []);
 
-    return randomChampion
+    return {randomChampion, refreshRandomChampion}
 }

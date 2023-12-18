@@ -7,12 +7,13 @@ interface InputProps {
     placeholder?: string
     list?: string
     className?: string
+    disabled?: boolean
 }
 
-export default function Input({value, onChange, placeholder, list, className}: InputProps) {
+export default function Input({value, onChange, placeholder, list, className, disabled}: InputProps) {
 
     return (
-        <input value={value} onChange={onChange} className={`${className}`}
+        <input disabled={disabled} value={value} onChange={onChange} className={`${className}`}
                placeholder={placeholder} list={list}/>
     )
 }

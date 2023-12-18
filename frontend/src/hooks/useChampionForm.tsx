@@ -16,6 +16,7 @@ export function useChampionForm() {
         })
 
         if (guessedChampion && guessedChampion[0]) {
+            setValue("")
             setChampions(prevState => {
                 return [guessedChampion[0], ...prevState]
             })
@@ -26,6 +27,7 @@ export function useChampionForm() {
         champions,
         value,
         setValue,
+        setChampions,
         submitHandler,
     }
 }

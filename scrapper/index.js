@@ -17,6 +17,8 @@ async function main() {
         const database = await client.db("lol")
         const collection = await database.collection("champions")
 
+        await collection.deleteMany({})
+
         const championsLink = await getChampionsLink()
 
         for (const link of championsLink) {

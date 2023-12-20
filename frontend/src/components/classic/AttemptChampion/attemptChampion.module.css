@@ -28,6 +28,17 @@
     font-size: 1.8rem;
 }
 
+@media (max-width: 995px) {
+    .box {
+        width: 80px;
+        height: 80px;
+    }
+
+    .box > p {
+        font-size: 1.4rem;
+    }
+}
+
 .wrong {
     background-color: var(--wrong);
 }

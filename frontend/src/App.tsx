@@ -1,7 +1,8 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import Root, {rootLoader} from "./pages/root/Root.tsx";
+import Root from "./pages/root/Root.tsx";
 import MainLayout from "./layout/MainLayout.tsx";
 import Classic from "./pages/classic/Classic.tsx";
+import {ClassicGameProvider} from "./context/classicGameContext.tsx";
 
 export default function App() {
 
@@ -12,11 +13,10 @@ export default function App() {
             {
                 path: "/",
                 element: <Root/>,
-                loader: rootLoader
             },
             {
                 path: "/classic",
-                element: <Classic/>,
+                element: <ClassicGameProvider><Classic/></ClassicGameProvider>
             }
         ]
     }])

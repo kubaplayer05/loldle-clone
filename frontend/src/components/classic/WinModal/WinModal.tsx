@@ -6,12 +6,13 @@ import styles from "./winModal.module.css"
 interface WinModalProps {
     randomChampion: Champion
     setShowModal: Dispatch<SetStateAction<boolean>>
+    isVisible: boolean
 }
 
-export default function WinModal({randomChampion, setShowModal}: WinModalProps) {
+export default function WinModal({randomChampion, setShowModal, isVisible}: WinModalProps) {
 
     return (
-        <Modal setShowModal={setShowModal}>
+        <Modal isVisible={isVisible} setShowModal={setShowModal}>
             <h3 className={styles.title}>You Won!</h3>
             <div>
                 <p>Guessed Champion:</p>

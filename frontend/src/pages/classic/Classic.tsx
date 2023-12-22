@@ -7,6 +7,7 @@ import styles from "./classic.module.css"
 import {useWinModal} from "../../hooks/useWinModal.tsx";
 import WinModal from "../../components/classic/WinModal/WinModal.tsx";
 import {useClassicGame} from "../../hooks/useClassicGame.tsx";
+import {motion} from "framer-motion";
 
 export default function Classic() {
 
@@ -16,7 +17,7 @@ export default function Classic() {
     const isOver = champions[0] ? randomChampion?.name === champions[0].name : false
 
     return (
-        <main>
+        <motion.main initial={{opacity: 0}} animate={{opacity: 1}}>
             <form onSubmit={submitHandler} className={styles.form}>
                 <Input value={value} onChange={(e: ChangeEvent<HTMLInputElement>) => {
                     setValue(e.target.value);
@@ -29,8 +30,8 @@ export default function Classic() {
             {randomChampion && <AttemptList/>}
             {isOver &&
                 <Button onClick={refreshGame} isLink={false}>Reset</Button>}
-            {showWinModal && randomChampion &&
-                <WinModal randomChampion={randomChampion} setShowModal={setShowWinModal}/>}
-        </main>
+            {randomChampion &&
+                <WinModal isVisible={showWinModal} randomChampion={randomChampion} setShowModal={setShowWinModal}/>}
+        </motion.main>
     )
 }

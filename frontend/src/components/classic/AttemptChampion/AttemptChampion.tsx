@@ -1,6 +1,8 @@
-import {Champion} from "../../../types/championTypes.ts";
 import style from "./attemptChampion.module.css"
 import {getBoxStyle} from "../../../lib/getBoxStyle.ts";
+import {useClassicGame} from "../../../hooks/useClassicGame.tsx";
+import {stagger, useAnimate, motion} from "framer-motion";
+import {useEffect} from "react";
 
 interface AttemptChampionProps {
     name: string,
@@ -11,7 +13,6 @@ interface AttemptChampionProps {
     rangeType: string,
     regions: [string]
     releaseYear: string,
-    randomChampion: Champion
 }
 
 export default function AttemptChampion({
@@ -23,28 +24,40 @@ export default function AttemptChampion({
                                             rangeType,
                                             regions,
                                             releaseYear,
-                                            randomChampion
                                         }: AttemptChampionProps) {
 
+
+    const {randomChampion} = useClassicGame()
+
+    if (!randomChampion) {
+        return null
+    }
 
     const formattedYear = releaseYear.split("-")[0]
     const formattedYearForRandom = randomChampion.releaseDate.split("-")[0]
 
+    const [scope, animate] = useAnimate()
+
+    useEffect(() => {
+        animate(`div`, {opacity: 1}, {delay: stagger(0.15)})
+    });
+
     return (
-        <div className={style.wrapper}>
-            <div className={style.boxWrapper}>
+        <motion.div ref={scope} animate={{opacity: 1}} initial={{opacity: 0}}
+                    className={style.wrapper}>
+            <div className={`${style.boxWrapper}`}>
 
                 <div className={`${style.box} ${randomChampion.name === name ? style.perfect : style.wrong}`}>
                     <p>{name}</p>
                 </div>
             </div>
-            <div className={style.boxWrapper}>
+            <div className={`${style.boxWrapper}`}>
 
                 <div className={`${style.box} ${randomChampion.gender === gender ? style.perfect : style.wrong}`}>
                     <p>{gender}</p>
                 </div>
             </div>
-            <div className={style.boxWrapper}>
+            <div className={`${style.boxWrapper}`}>
 
                 <div className={`${style.box} ${getBoxStyle(randomChampion.positions, positions)}`}>
                     <p>{positions.map(position => {
@@ -52,7 +65,7 @@ export default function AttemptChampion({
                     })}</p>
                 </div>
             </div>
-            <div className={style.boxWrapper}>
+            <div className={`${style.boxWrapper}`}>
 
                 <div className={`${style.box} ${getBoxStyle(randomChampion.species, species)}`}>
                     <p>{species.map(specie => {
@@ -60,19 +73,19 @@ export default function AttemptChampion({
                     })}</p>
                 </div>
             </div>
-            <div className={style.boxWrapper}>
+            <div className={`${style.boxWrapper}`}>
 
                 <div className={`${style.box} ${randomChampion.resource === resource ? style.perfect : style.wrong}`}>
                     <p>{resource}</p>
                 </div>
             </div>
-            <div className={style.boxWrapper}>
+            <div className={`${style.boxWrapper}`}>
 
                 <div className={`${style.box} ${randomChampion.rangeType === rangeType ? style.perfect : style.wrong}`}>
                     <p>{rangeType}</p>
                 </div>
             </div>
-            <div className={style.boxWrapper}>
+            <div className={`${style.boxWrapper}`}>
 
                 <div className={`${style.box} ${getBoxStyle(randomChampion.regions, regions)}`}>
                     <p>{regions.map(region => {
@@ -80,13 +93,13 @@ export default function AttemptChampion({
                     })}</p>
                 </div>
             </div>
-            <div className={style.boxWrapper}>
+            <div className={`${style.boxWrapper}`}>
 
                 <div
                     className={`${style.box} ${formattedYearForRandom === formattedYear ? style.perfect : style.wrong}`}>
                     <p>{formattedYear}</p>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }

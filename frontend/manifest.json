@@ -1,0 +1,11 @@
+{
+  "name": "Loldle",
+  "start_url": ".",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "public/vite.svg",
+      "sizes": "32x32"
+    }
+  ]
+}

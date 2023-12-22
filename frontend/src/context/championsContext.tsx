@@ -1,5 +1,6 @@
-import React, {createContext, useState, ReactNode} from "react";
+import React, {createContext, useState, ReactNode, useEffect} from "react";
 import {Champion} from "../types/championTypes.ts";
+import {useFetch} from "../hooks/useFetch.tsx";
 
 interface ChampionsProviderProps {
     children: ReactNode
@@ -15,13 +16,29 @@ export const ChampionsContext = createContext<ProviderProps | null>(null)
 export function ChampionsProvider({children}: ChampionsProviderProps) {
 
     const [champions, setChampions] = useState<Champion[]>([])
+    const {fetchData, isLoading} = useFetch()
+
+    useEffect(() => {
+
+        // TODO: use indexed db
+
+        async function getChampions() {
+            const data = await fetchData("/champion/all")
+            if (data) {
+                setChampions(data)
+            }
+        }
+
+        getChampions()
+    }, []);
 
     return (
         <ChampionsContext.Provider value={{
             champions,
             setChampions
         }}>
-            {children}
+            {!isLoading && children}
+            {isLoading && <p>Loading ...</p>}
         </ChampionsContext.Provider>
     )
 }

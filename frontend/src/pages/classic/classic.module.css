@@ -14,3 +14,13 @@
 .btn {
     width: 100px;
 }
+
+@media (max-width: 995px) {
+    .form {
+        width: 100%;
+    }
+
+    .input::placeholder {
+        font-size: 1.4rem;
+    }
+}

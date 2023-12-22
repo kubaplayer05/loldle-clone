@@ -5,7 +5,7 @@ export default function MainLayout() {
     return (
         <>
             <header>
-                <Link to={"/"}><h1>Gongwardzista</h1></Link>
+                <Link to={"/"}><h1>Loldle</h1></Link>
             </header>
             <Outlet/>
         </>

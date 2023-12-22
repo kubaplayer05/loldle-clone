@@ -1,13 +1,10 @@
-import {Champion} from "../../../types/championTypes.ts";
 import AttemptChampion from "../AttemptChampion/AttemptChampion.tsx";
 import styles from "./attemptList.module.css"
+import {useClassicGame} from "../../../hooks/useClassicGame.tsx";
 
-interface AttemptListProps {
-    champions: Champion[]
-    randomChampion: Champion
-}
+export default function AttemptList() {
 
-export default function AttemptList({champions, randomChampion}: AttemptListProps) {
+    const {champions} = useClassicGame()
 
     if (!champions.length) {
         return (
@@ -35,7 +32,7 @@ export default function AttemptList({champions, randomChampion}: AttemptListProp
                                      positions={champion.positions}
                                      species={champion.species} resource={champion.resource}
                                      rangeType={champion.rangeType} regions={champion.regions}
-                                     releaseYear={champion.releaseDate} randomChampion={randomChampion}/>
+                                     releaseYear={champion.releaseDate}/>
                 )
             })}
         </div>

@@ -12,7 +12,7 @@ export function useChampionForm() {
         e.preventDefault()
 
         const guessedChampion = ctx?.champions.filter((champion) => {
-            return champion.name === value
+            return champion.name.toLowerCase() === value.toLowerCase()
         })
 
         if (guessedChampion && guessedChampion[0]) {

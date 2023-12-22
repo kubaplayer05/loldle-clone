@@ -1,6 +1,6 @@
-import {Champion} from "../../../types/championTypes.ts";
 import style from "./attemptChampion.module.css"
 import {getBoxStyle} from "../../../lib/getBoxStyle.ts";
+import {useClassicGame} from "../../../hooks/useClassicGame.tsx";
 
 interface AttemptChampionProps {
     name: string,
@@ -11,7 +11,6 @@ interface AttemptChampionProps {
     rangeType: string,
     regions: [string]
     releaseYear: string,
-    randomChampion: Champion
 }
 
 export default function AttemptChampion({
@@ -23,9 +22,14 @@ export default function AttemptChampion({
                                             rangeType,
                                             regions,
                                             releaseYear,
-                                            randomChampion
                                         }: AttemptChampionProps) {
 
+
+    const {randomChampion} = useClassicGame()
+
+    if (!randomChampion) {
+        return null
+    }
 
     const formattedYear = releaseYear.split("-")[0]
     const formattedYearForRandom = randomChampion.releaseDate.split("-")[0]
